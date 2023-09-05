@@ -1,0 +1,57 @@
+body{
+ background: #F3F3F0 !important;
+}
+
+/* carousel buttons */
+.custom-nav {
+    position: relative;
+}
+.custom-prev,
+.custom-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: lightgray; /* Background color for buttons */
+    border: none;
+    padding: 100px 8px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 900;
+    color: #333; /* Text color for buttons */
+    z-index: 100;
+}
+
+.custom-prev {
+    left: 0px; /* Adjust the left position as needed */
+}
+
+.custom-next {
+    right: 0px; /* Adjust the right position as needed */
+}
+
+/* card */
+.card-text{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* start showing ellipsis when 3rd line is reached */
+    white-space: pre-wrap; /* let the text wrap preserving spaces */
+}
+.card-title{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* start showing ellipsis when 3rd line is reached */
+    white-space: pre-wrap; /* let the text wrap preserving spaces */
+}
+
+
+/* buttons */
+.addtocart{
+    background: #F7DA06 !important;
+    width: 100%;
+}
+.buynow{
+    background: #F9A811 !important;
+    width: 100%;
+}
