@@ -84,6 +84,9 @@
                     </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cart') }}">Cart</a>
+                </li>
             @endguest
         </ul>
       </div>

@@ -23,6 +23,7 @@
                                         <div class="col-md-6">
                                             <form action="/cart" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="productId" value="{{ $p->id }}">
                                                 <button type="submit" class="btn addtocart rounded-pill">Add to Cart</button>
                                             </form>
                                         </div>
