@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function Laravel\Prompts\alert;
+use function PHPUnit\Framework\isNull;
 
 class CartController extends Controller
 {
@@ -16,17 +20,40 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-
         if (Auth::check()) {
             $productId = $request->productId;
             $userId = Auth::user()->id;
 
-            $cart = new CartProduct();
-            $cart->user_id = $userId;
-            $cart->product_id = $productId;
+            $product = Product::where('id', $request->productId)->first();
+            $cart = CartProduct::where('user_id', $userId)->where('product_id', $productId)->first();
+            if (is_null($cart)) {
+                $cart = new CartProduct();
+                $cart->user_id = $userId;
+                $cart->product_id = $productId;
+                $cart->quantity = 1;
+                $cart->total = ($product->price * $cart->quantity);
+                $cart->save();
+            } else {
+                if ($request->decrement || $request->increment) {
+                    // code for increment decrement of quntity in cart
+                    if ($request->decrement == "dec") {
+                        $cart->quantity -= 1;
+                        $cart->total = ($product->price * $cart->quantity);
+                        $cart->save();
+                    }else{
+                        $cart->quantity += 1;
+                        $cart->total = ($product->price * $cart->quantity);
+                        $cart->save();
+                    }
+                } else {
+                    // code for increment quantity on same item added to cart
+                    $cart->quantity += 1;
+                    $cart->total = ($product->price * $cart->quantity);
+                    $cart->save();
+                }
+            }
 
-            $cart->save();
-            $cartProducts = CartProduct::where('user_id', Auth::user()->id)->get();
+            $cartProducts = CartProduct::where('user_id', $userId)->get();
             return view('cart', ['cartProducts' => $cartProducts]);
         }
         return redirect()->route('login');

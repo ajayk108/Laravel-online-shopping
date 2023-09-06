@@ -18,7 +18,7 @@
                                     <h3>{{ $p->details }}</h3>
                                     <hr>
                                     <button class="btn btn-danger btn-sm mb-2">Deal of the Day</button>
-                                    <h2 class="mb-3"><span class="text-muted">&#8377; </span>{{ $p->price }}</h2>
+                                    <h2 class="mb-3"><span class="text-muted">₹</span>{{ number_format($p->price); }}</h2>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <form action="/cart" method="POST">
