@@ -38,4 +38,5 @@ Route::post('/productDetials', [ProductDetailController::class, 'show']);
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store']);
+Route::get('cart/{id}/delete', [CartController::class, 'destroy']);
 

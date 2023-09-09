@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="container-fluid mt-2">
+    <div class="container-fluid mt-2 text-center">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -10,15 +10,20 @@
                     <th scope="col" style="width: 30%;">Detail</th>
                     <th class="text-center" scope="col" style="width: 5%;">Type</th>
                     <th class="text-center" scope="col" style="width: 10%;">Image</th>
-                    <th class="text-center" scope="col" style="width: 20%;">Qty</th>
+                    <th class="text-center" scope="col" style="width: 20%;">Quantity</th>
                     <th scope="col" style="width: 5%;">Price</th>
                     <th scope="col" style="width: 5%;">Total</th>
                     <th scope="col" style="width: 10%;">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @php $Grtotal=0;
+                @endphp
                 @foreach ($cartProducts as $cartProduct)
                     <tr>
+                        @php
+                        $Grtotal += $cartProduct->total;
+                        @endphp
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $cartProduct->product->name }}</td>
                         <td>{{ $cartProduct->product->details }}</td>
@@ -45,13 +50,21 @@
                                 </form>
                             </div>
                         </td>
-                        <td>{{ number_format($cartProduct->product->price) }}</td>
-                        <td>{{ number_format($cartProduct->total) }}</td>
-                        <td>@mdo</td>
+                        <td> ₹{{ number_format($cartProduct->product->price) }}</td>
+                        <td> ₹{{ number_format($cartProduct->total) }}</td>
+                        <td><a href="cart/{{ $cartProduct->id }}/delete" class="btn btn-danger btn-sm">Delete</a></td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="6"></td>
+                    <td><strong>GrandTotal</strong></td>
+                    <td><strong> ₹{{ number_format($Grtotal,2) }}</strong></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
-
+        <div class="d-flex justify-content-center">
+            <a class="btn cartbuynow rounded-pill d-flex justify-content-center align-items-center">Buy Now</a>
+        </div>
     </div>
 @endsection

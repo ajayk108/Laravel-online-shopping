@@ -58,4 +58,11 @@ class CartController extends Controller
         }
         return redirect()->route('login');
     }
+
+    public function destroy($id){
+        $cart = CartProduct::where('id', $id)->first();
+        $cart->delete();
+
+        return back();
+    }
 }

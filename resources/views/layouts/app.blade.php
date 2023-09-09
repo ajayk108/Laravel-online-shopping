@@ -40,7 +40,7 @@
                     nav: false,
                     dots: false,
                     autoplay: true,
-                    autoplayTimeout: 2000,
+                    autoplayTimeout: 1000,
                     responsive: {
                         0: {
                             items: 1
